@@ -82,7 +82,6 @@ const PostForm = () => {
         height: "32rem",
         marginTop: "1rem",
       }}
-      color={theme.colors.brand[1]}
     >
       <form className="create" onSubmit={handleSubmit}>
         <Text size="lg">Add a New Post</Text>

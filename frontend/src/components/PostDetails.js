@@ -2,14 +2,7 @@ import { useState } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import {
-  Text,
-  Input,
-  Button,
-  Card,
-  useMantineTheme,
-  Paper,
-} from "@mantine/core";
+import { Text, Input, Button, Card, useMantineTheme } from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 
@@ -95,84 +88,87 @@ const PostDetails = ({ post }) => {
   };
 
   return (
-    <Paper className="post-details" shadow="xs">
-      {/* first part is the edit mode */}
-      <Card className="post-details">
-        {" "}
-        {editMode ? (
-          <form onSubmit={handleEditSubmit}>
-            <Text size="md">Title:</Text>
-            <Input
-              type="text"
-              name="title"
-              value={editedPost.title}
-              onChange={handleInputChange}
-            />
-            {/* <Text size="md">Image:</Text> */}
-            {/* <input
+    <Card
+      shadow="xs"
+      className="post-details"
+      style={{
+        backgroundColor: secondaryColor,
+      }}
+    >
+      {" "}
+      {editMode ? (
+        <form onSubmit={handleEditSubmit}>
+          <Text size="md">Title:</Text>
+          <Input
+            type="text"
+            name="title"
+            value={editedPost.title}
+            onChange={handleInputChange}
+          />
+          {/* <Text size="md">Image:</Text> */}
+          {/* <input
             type="text"
             name="image"
             value={editedPost.image}
             onChange={handleInputChange}
           /> */}
-            <Text size="md">Reps:</Text>
-            <Input
-              type="text"
-              name="reps"
-              value={editedPost.reps}
-              onChange={handleInputChange}
-            />
-            <Text size="md">Caption:</Text>
-            <Input
-              type="text"
-              name="caption"
-              value={editedPost.caption}
-              onChange={handleInputChange}
-            />
-            <button type="submit">Save</button>
-          </form>
-        ) : (
-          <div>
-            <Link
-              to={`/post/:${post._id}`}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <Text>
-                <h4>{post.title}</h4>
-              </Text>
-              <div>{<img src={post.image} alt="Post Image" />}</div>
-              <Text>
-                <strong>Reps: </strong>
-                {post.reps}
-              </Text>
-              <Text>
-                <strong>Caption: </strong>
-                {post.caption}
-              </Text>
-              <p>{post.createdAt}</p>
-            </Link>
-            {/* <span
+          <Text size="md">Reps:</Text>
+          <Input
+            type="text"
+            name="reps"
+            value={editedPost.reps}
+            onChange={handleInputChange}
+          />
+          <Text size="md">Caption:</Text>
+          <Input
+            type="text"
+            name="caption"
+            value={editedPost.caption}
+            onChange={handleInputChange}
+          />
+          <button type="submit">Save</button>
+        </form>
+      ) : (
+        <div>
+          <Link
+            to={`/post/:${post._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <Text>
+              <h4>{post.title}</h4>
+            </Text>
+            <div>{<img src={post.image} alt="Post Image" />}</div>
+            <Text>
+              <strong>Reps: </strong>
+              {post.reps}
+            </Text>
+            <Text>
+              <strong>Caption: </strong>
+              {post.caption}
+            </Text>
+            <p>{post.createdAt}</p>
+          </Link>
+          {/* <span
             className="material-symbols-outlined"
             onClick={handleDeleteClick}
           >
             Delete
           </span> */}
-            <span>
-              <ActionIcon
-                variant="outline"
-                className="material-symbols-outlined "
-                // color={theme.colorScheme === "dark" ? "white" : "black"}
-                onClick={handleDeleteClick}
-                title="Delete"
-              >
-                <IconTrash size="1.1rem" />
-              </ActionIcon>
-            </span>
-            <Button onClick={handleEditClick}>Edit</Button>
-          </div>
-        )}
-      </Card>
-    </Paper>
+          <span>
+            <ActionIcon
+              variant="outline"
+              className="material-symbols-outlined "
+              // color={theme.colorScheme === "dark" ? "white" : "black"}
+              onClick={handleDeleteClick}
+              title="Delete"
+            >
+              <IconTrash size="1.1rem" />
+            </ActionIcon>
+          </span>
+          <Button onClick={handleEditClick}>Edit</Button>
+        </div>
+      )}
+    </Card>
   );
 };
 

@@ -6,7 +6,7 @@ import {
   ColorSchemeProvider,
   ColorScheme,
 } from "@mantine/core";
-import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 
 // pages & components
 import Home from "./pages/Home";
@@ -26,7 +26,7 @@ function App() {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   };
 
-  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+  useHotkeys([["mod+J", () => toggleColorScheme()]]);
   // keyboard shortcut
 
   return (
@@ -42,25 +42,16 @@ function App() {
               primaryShade: 7,
               colors: {
                 brand: [
-                  "#F4FCE3",
-
-                  "#E9FAC8",
-
-                  "#D8F5A2",
-
-                  "#C0EB75",
-
-                  "#A9E34B",
-
-                  "#94D82D",
-
-                  "#82C91E",
-
-                  "#74B816",
-
-                  "#66A80F",
-
-                  "#5C940D",
+                  "#EBFBEE",
+                  "#D3F9D8",
+                  "#B2F2BB",
+                  "#8CE99A",
+                  "#69DB7C",
+                  "#51CF66",
+                  "#40C057",
+                  "#37B24D",
+                  "#2F9E44",
+                  "#2B8A3E",
                 ],
               },
               primaryColor: "brand",

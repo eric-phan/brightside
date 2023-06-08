@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Button, Card, Text } from "@mantine/core";
-import { ActionIcon, useMantineColorScheme } from "@mantine/core";
+import {
+  ActionIcon,
+  useMantineTheme,
+  useMantineColorScheme,
+} from "@mantine/core";
 import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
 const Navbar = () => {
@@ -13,15 +17,29 @@ const Navbar = () => {
   const handleClick = () => {
     logout();
   };
-
+  const theme = useMantineTheme();
+  const secondaryColor =
+    theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1];
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
   return (
     <header style={{ borderBottom: "1px solid #F1F3F5" }}>
-      <Card shadow="sm" size="xl" className="headerContainer">
-        <Link to="/">
+      <Card
+        shadow="sm"
+        // style={{
+        //   backgroundColor: secondaryColor,
+        // }}
+        size="xl"
+        className="headerContainer"
+      >
+        {/* <Link to="/">
           <Text size="xl">Brightside</Text>
+        </Link> */}
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Text size="xl" weight={700} color="green" uppercase>
+            Brightside
+          </Text>
         </Link>
 
         <nav>
@@ -38,7 +56,7 @@ const Navbar = () => {
           )}
           <ActionIcon
             variant="outline"
-            color={dark ? "yellow" : "blue"}
+            color={dark ? "green" : "blue"}
             onClick={() => toggleColorScheme()}
             title="Toggle color scheme"
           >
@@ -46,7 +64,9 @@ const Navbar = () => {
           </ActionIcon>
           {!user && (
             <div>
-              <Link to="/login">Login</Link>
+              <Link to="/login" size="sm">
+                Login
+              </Link>
               <Link to="/signup">Signup</Link>
             </div>
           )}
@@ -57,44 +77,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// const Navbar = () => {
-//   const { logout } = useLogout();
-//   // imported logout function
-//   const { user } = useAuthContext();
-
-//   const handleClick = () => {
-//     logout();
-//   };
-
-//   return (
-//     <header>
-//       <div className="container">
-//         <Link to="/">
-//           <h1>Brightside</h1>
-//         </Link>
-//         <nav>
-//           {/* if user is logged in show this */}
-//           {user && (
-//             <div>
-//               <span>{user.email}</span>
-//               <Link to="/">Home</Link>
-//               <Link to="/about">About</Link>
-//               <Link to="/feed">Feed</Link>
-//               <button onClick={handleClick}>Log out</button>
-//             </div>
-//           )}
-//           {/* if not logged in show this */}
-//           {!user && (
-//             <div>
-//               <Link to="/login">Login</Link>
-//               <Link to="/signup">Signup</Link>
-//             </div>
-//           )}
-//         </nav>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Navbar;

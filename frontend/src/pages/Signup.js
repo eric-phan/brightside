@@ -19,8 +19,8 @@ const Signup = () => {
   };
 
   return (
-    <Card>
-      <Paper shadow="xl" className="signupPaper">
+    <Card className="signupCard">
+      <Paper shadow="xl" className="signupContainer">
         <form className="signup" onSubmit={handleSubmit}>
           <h3>Sign Up</h3>
 

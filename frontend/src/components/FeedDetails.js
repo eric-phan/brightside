@@ -1,7 +1,7 @@
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import { Text, Input, Button, Card } from "@mantine/core";
+import { Text, useMantineTheme, Card } from "@mantine/core";
 
 // allows you to be authorized when you delete, make a post, and at homepage
 
@@ -11,6 +11,9 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const FeedDetails = ({ post }) => {
   const { dispatch } = usePostsContext();
   const { user } = useAuthContext();
+  const theme = useMantineTheme();
+  const secondaryColor =
+    theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1];
 
   const handleClick = async () => {
     if (!user) {
@@ -31,7 +34,13 @@ const FeedDetails = ({ post }) => {
   };
 
   return (
-    <Card className="post-details" shadow="xs">
+    <Card
+      className="post-details"
+      shadow="xs"
+      style={{
+        backgroundColor: secondaryColor,
+      }}
+    >
       <Link
         to={`/post/:${post._id}`}
         style={{ textDecoration: "none", color: "inherit" }}
