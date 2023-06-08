@@ -21,7 +21,7 @@ The application hast the following pages:
 
 
 ## Technologies Used
-Made with **Node.js**, **Express**, **MongoDB**, **JavaScript**, **EJS**, **Cloudinary**, **Bootstrap**, and **CSS3**.
+Made with **Node.js**, **Express**, **MongoDB**, **React**, **MantineUI**, **Cloudinary**, and **CSS3**.
 
 ## Use and Installation
 
@@ -42,9 +42,11 @@ To get the values for these environment variables, you will need to
 ### Packages/Dependencies Utilized
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.25.1",
+    "cors": "^2.8.5",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
-    "ejs": "^3.1.6",
+    "react": "^18.1.0",
+    "@mantine/core": "^6.0.13",
     "express": "^4.18.2",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.1",
@@ -54,9 +56,8 @@ To get the values for these environment variables, you will need to
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.7",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0",
-    "validator": "^13.6.0"
+    "jsonwebtoken": "^8.5.1",
+    "validator": "^13.7.0"
   }
 
 ## Things to add
