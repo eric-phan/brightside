@@ -43,7 +43,7 @@ const PostForm = () => {
     formData.append("reps", reps);
     formData.append("caption", caption);
     formData.append("image", image);
-
+    console.log(formData);
     try {
       const response = await fetch("/api/posts", {
         method: "POST",
@@ -95,11 +95,13 @@ const PostForm = () => {
         />
 
         <Text size="md">Upload Image:</Text>
-        <FileInput
+
+        <input
           id="fileInput"
-          placeholder="Pick file"
-          accept="image/*"
+          type="file"
+          name="image"
           onChange={handleFileInputChange}
+          // trigger the image state saving fx above
           className="postFormInput"
         />
 

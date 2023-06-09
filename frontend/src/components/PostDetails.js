@@ -73,17 +73,26 @@ const PostDetails = ({ post }) => {
       return;
     }
 
-    const response = await fetch("/api/posts/" + post._id, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
+    if (post.user_id !== user._id) {
+      console.log("You are not authorized to delete this post.");
+      return;
+    }
 
-    const json = await response.json();
+    try {
+      const response = await fetch("/api/posts/" + post._id, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
 
-    if (response.ok) {
-      dispatch({ type: "DELETE_POST", payload: json });
+      const json = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "DELETE_POST", payload: json });
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
