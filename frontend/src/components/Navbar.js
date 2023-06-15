@@ -37,7 +37,7 @@ const Navbar = () => {
           <Text size="xl">Brightside</Text>
         </Link> */}
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Text size="xl" weight={700} color="green" uppercase>
+          <Text size="xl" weight={700} color="green" tt="uppercase">
             Brightside
           </Text>
         </Link>

@@ -26,6 +26,8 @@ const loginUser = async (req, res) => {
   }
 }
 
+// const verifyUser
+
 // signup a user
 const signupUser = async (req, res) => {
   const {email, password} = req.body
