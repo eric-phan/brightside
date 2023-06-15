@@ -56,6 +56,34 @@ nav button {
   font-size: 1em;
 }
 
+/* Media Query for Navbar small screens */
+@media (max-width: 580px) {
+  .headerContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navContainer {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .navContainer > * {
+    margin-bottom: 10px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  nav a,
+  nav button {
+    margin: 5px 0;
+  }
+}
 .pages {
   /* max-width: 1400px; */
   padding: 0px;
@@ -96,8 +124,8 @@ nav button {
 
 .homeContainer,
 .feedContainer {
-  display: grid;
-  max-width: 65%;
+  /* display: grid; */
+  max-width: 45%;
   border-radius: 0;
   margin: 0 auto;
 }
@@ -134,6 +162,13 @@ nav button {
   /* color: #555; */
 }
 
+@media (max-width: 400px) {
+  .postDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .material-symbols-outlined {
   display: flex;
   align-items: center;
@@ -153,8 +188,12 @@ label,
 input {
   display: block;
 }
+.postForm {
+  width: 60%;
+  margin: 0 auto;
+}
 .postFormInput {
-  width: 40%;
+  width: 100%;
 }
 input {
   padding: 10px;

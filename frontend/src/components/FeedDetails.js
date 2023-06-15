@@ -1,10 +1,11 @@
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import { Text, useMantineTheme, Card } from "@mantine/core";
+import { Text, useMantineTheme, Card, Image, Button } from "@mantine/core";
 
 // allows you to be authorized when you delete, make a post, and at homepage
-
+import { ActionIcon } from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 // date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
@@ -15,7 +16,7 @@ const FeedDetails = ({ post }) => {
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1];
 
-  const handleClick = async () => {
+  const handleDeleteClick = async () => {
     if (!user) {
       return;
     }
@@ -41,37 +42,65 @@ const FeedDetails = ({ post }) => {
         backgroundColor: secondaryColor,
       }}
     >
-      <Link
-        to={`/post/:${post._id}`}
-        style={{ textDecoration: "none", color: "inherit" }}
+      <div
+        style={{
+          margin: "0 auto",
+          maxWidth: "400px",
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        {/* link to get individual post */}
-        <Text>
-          <h4>{post.title}</h4>
-        </Text>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: "1rem",
+          }}
+        >
+          <Link
+            to={`/post/:${post._id}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            {/* link to get individual post */}
+            <div style={{ flex: 1 }}>
+              <Text>
+                <h4 style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
+                  {post.title}
+                </h4>
+              </Text>
+              <Image src={post.image} alt="PostImage" />
+            </div>
 
-        <div>
-          {/* image */}
-          {<img src={post.image} alt="Post Image" />}
+            <Text>
+              <strong>Caption: </strong>
+              <span
+                style={{
+                  display: "inline-block",
+                  maxWidth: "100%",
+                  overflowWrap: "break-word",
+                }}
+              >
+                {post.caption}
+              </span>
+            </Text>
+            <Text>
+              {formatDistanceToNow(new Date(post.createdAt), {
+                addSuffix: true,
+              })}
+            </Text>
+          </Link>
         </div>
-        {/* <Text>
-          <strong>Reps: </strong>
-          {post.reps}
-        </Text> */}
-        <Text>
-          <strong>Caption: </strong>
-          {post.caption}
-        </Text>
-        <p>
-          {formatDistanceToNow(new Date(post.createdAt), {
-            addSuffix: true,
-          })}
-        </p>
-      </Link>
-      <span className="material-symbols-outlined" onClick={handleClick}>
-        Delete
-      </span>
-      {/* leave open the delete button to delete and not link to post */}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <ActionIcon
+            variant="outline"
+            className="material-symbols-outlined"
+            onClick={handleDeleteClick}
+            title="Delete"
+          >
+            <IconTrash size="1.1rem" />
+          </ActionIcon>
+        </div>
+      </div>
     </Card>
   );
 };

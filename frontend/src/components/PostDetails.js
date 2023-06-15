@@ -2,7 +2,14 @@ import { useState } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import { Text, Image, Input, Button, Card, useMantineTheme } from "@mantine/core";
+import {
+  Text,
+  Image,
+  Input,
+  Button,
+  Card,
+  useMantineTheme,
+} from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -143,39 +150,113 @@ const PostDetails = ({ post }) => {
         </form>
       ) : (
         // Display mode
-        <div style={{ display: "flex" }}>
-          <div style={{ flex: "0 0 auto", marginRight: "1rem" }}>
+        // <div style={{ display: "flex" }}>
+        //   <div style={{ flex: "0 0 auto", marginRight: "1rem" }}>
+        //     <Link
+        //       to={`/post/:${post._id}`}
+        //       style={{ textDecoration: "none", color: "inherit" }}
+        //     >
+        //       {/* Display the image on the left */}
+        //       <div>
+        //         <img
+        //           src={post.image}
+        //           alt="Post Image"
+        //           style={{ width: "100%" }}
+        //         />
+        //       </div>
+        //     </Link>
+        //   </div>
+        //   <div style={{ flex: "1 1 auto" }}>
+        //     <Link
+        //       to={`/post/:${post._id}`}
+        //       style={{ textDecoration: "none", color: "inherit" }}
+        //     >
+        //       {/* Display the caption on the right */}
+        //       <div>
+        //         <Text>
+        //           <h4>{post.title}</h4>
+        //         </Text>
+        //         {/* <Text>
+        //               <strong>Reps: </strong>
+        //               {post.reps}
+        //             </Text> */}
+        //         <Text>
+        //           <strong>Caption: </strong>
+        //           {post.caption}
+        //         </Text>
+        //         <Text>
+        //           {formatDistanceToNow(new Date(post.createdAt), {
+        //             addSuffix: true,
+        //           })}
+        //         </Text>
+        //       </div>
+        //     </Link>
+        //     <span>
+        //       <ActionIcon
+        //         variant="outline"
+        //         className="material-symbols-outlined "
+        //         onClick={handleDeleteClick}
+        //         title="Delete"
+        //       >
+        //         <IconTrash size="1.1rem" />
+        //       </ActionIcon>
+        //     </span>
+        //     <Button style={{ marginTop: "23.4rem" }} onClick={handleEditClick}>
+        //       Edit
+        //     </Button>
+        //   </div>
+        // </div>
+        <div
+          style={{
+            margin: "0 auto",
+            maxWidth: "400px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginBottom: "1rem",
+            }}
+          >
             <Link
               to={`/post/:${post._id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              {/* Display the image on the left */}
-              <div>
-                <img
+              <div style={{ flex: 1 }}>
+              <Text>
+                  <h4 style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
+                    {post.title}
+                  </h4>
+                </Text>
+                <Image
                   src={post.image}
-                  alt="Post Image"
-                  style={{ width: "100%" }}
+                  alt="PostImage"
+                  style={{ width: "100%", height: "auto" }}
                 />
               </div>
             </Link>
           </div>
-          <div style={{ flex: "1 1 auto" }}>
+          <div>
             <Link
               to={`/post/:${post._id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              {/* Display the caption on the right */}
               <div>
-                <Text>
-                  <h4>{post.title}</h4>
-                </Text>
-                {/* <Text>
-                      <strong>Reps: </strong>
-                      {post.reps}
-                    </Text> */}
+              
                 <Text>
                   <strong>Caption: </strong>
-                  {post.caption}
+                  <span
+                    style={{
+                      display: "inline-block",
+                      maxWidth: "100%",
+                      overflowWrap: "break-word",
+                    }}
+                  >
+                    {post.caption}
+                  </span>
                 </Text>
                 <Text>
                   {formatDistanceToNow(new Date(post.createdAt), {
@@ -184,19 +265,17 @@ const PostDetails = ({ post }) => {
                 </Text>
               </div>
             </Link>
-            <span>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button onClick={handleEditClick}>Edit</Button>
               <ActionIcon
                 variant="outline"
-                className="material-symbols-outlined "
+                className="material-symbols-outlined"
                 onClick={handleDeleteClick}
                 title="Delete"
               >
                 <IconTrash size="1.1rem" />
               </ActionIcon>
-            </span>
-            <Button style={{ marginTop: "23.4rem" }} onClick={handleEditClick}>
-              Edit
-            </Button>
+            </div>
           </div>
         </div>
       )}
