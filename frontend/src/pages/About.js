@@ -26,7 +26,7 @@ const About = () => {
         />
         <ColorSchemeProvider colorScheme="dark">
           <div className="aboutContent">
-            <Text font-size="30px" className="aboutHeading" color="white">
+            <Text fontSize="30px" className="aboutHeading" color="white">
               About Brightside
             </Text>
             

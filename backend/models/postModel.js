@@ -16,10 +16,10 @@ const postSchema = new Schema(
       type: String,
       require: true,
     },
-    reps: {
-      type: Number,
-      required: true,
-    },
+    // reps: {
+    //   type: Number,
+    //   required: true,
+    // },
     caption: {
       type: String,
       required: true,

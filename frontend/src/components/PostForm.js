@@ -6,9 +6,10 @@ import {
   Text,
   Card,
   Button,
-  FileInput,
+  FileButton,
   TextInput,
   useMantineTheme,
+  FileInput,
 } from "@mantine/core";
 
 const PostForm = () => {
@@ -17,6 +18,7 @@ const PostForm = () => {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [reps, setReps] = useState("");
+  // const [file, setFile] = (useState < File) | (null > null);
   const [caption, setCaption] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -25,10 +27,11 @@ const PostForm = () => {
   const theme = useMantineTheme();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1];
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
+
+  // const handleFileInputChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setImage(file);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,7 +98,7 @@ const PostForm = () => {
         />
 
         <Text size="md">Upload Image:</Text>
-
+        {/* 
         <input
           id="fileInput"
           type="file"
@@ -103,16 +106,34 @@ const PostForm = () => {
           onChange={handleFileInputChange}
           // trigger the image state saving fx above
           className="postFormInput"
-        />
+        /> */}
+        <FileInput
+          id="fileInput"
+          name="image"
+          value={image}
+          onChange={setImage}
+          placeholder="Upload file"
+          className="postFormInput"
+        >
+          Choose File
+        </FileInput>
 
-        <Text size="md">Reps:</Text>
+        {/* <FileButton
+          onChange={handleFileInputChange}
+          accept="image/png,image/jpeg"
+       
+        >
+          {(props) => <Button {...props}>Upload image</Button>}
+        </FileButton> */}
+
+        {/* <Text size="md">Reps:</Text>
         <TextInput
           type="number"
           className="postFormInput"
           value={reps}
           onChange={(e) => setReps(e.target.value)}
           error={emptyFields.includes("reps")}
-        />
+        /> */}
 
         <Text size="md">Caption:</Text>
         <TextInput

@@ -46,7 +46,7 @@ const getPost = async (req, res) => {
 const createPost = async (req, res) => {
   const { title, reps, caption } = req.body;
   const image = req.file; // Use req.file instead of req.body.image
-  console.log(req.file);
+ 
   // ...
 
   try {

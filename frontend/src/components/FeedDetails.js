@@ -54,10 +54,10 @@ const FeedDetails = ({ post }) => {
           {/* image */}
           {<img src={post.image} alt="Post Image" />}
         </div>
-        <Text>
+        {/* <Text>
           <strong>Reps: </strong>
           {post.reps}
-        </Text>
+        </Text> */}
         <Text>
           <strong>Caption: </strong>
           {post.caption}
