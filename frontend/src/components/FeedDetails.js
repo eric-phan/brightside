@@ -1,12 +1,10 @@
+import { useEffect, useState } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
 import { Text, useMantineTheme, Card, Image, Button } from "@mantine/core";
-
-// allows you to be authorized when you delete, make a post, and at homepage
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
-// date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const FeedDetails = ({ post }) => {
@@ -15,22 +13,63 @@ const FeedDetails = ({ post }) => {
   const theme = useMantineTheme();
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[1];
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      try {
+        const verifyResponse = await fetch("/api/user/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: user.token,
+          }),
+        });
+
+        if (verifyResponse.ok) {
+          const { userId } = await verifyResponse.json();
+          setIsAuthorized(post.user_id === userId);
+        } else {
+          setIsAuthorized(false);
+        }
+      } catch (error) {
+        console.error(error);
+        setIsAuthorized(false);
+      }
+    };
+
+    verifyUser();
+  }, [user.token, post.user_id]);
 
   const handleDeleteClick = async () => {
-    if (!user) {
+    if (!user || !isAuthorized) {
       return;
     }
 
-    const response = await fetch("/api/posts/" + post._id, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    const json = await response.json();
+    try {
+      const deleteResponse = await fetch("/api/posts/" + post._id, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
 
-    if (response.ok) {
-      dispatch({ type: "DELETE_POST", payload: json });
+      if (deleteResponse.ok) {
+        console.log("Post deleted successfully.");
+
+        // Remove the deleted post from the state
+        dispatch({ type: "DELETE_POST", payload: post._id });
+      } else {
+        const errorResponse = await deleteResponse.json();
+        console.log("Failed to delete post.");
+        console.log("Error:", errorResponse.error);
+        // Handle the error case as needed
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle the error case as needed
     }
   };
 
@@ -61,7 +100,6 @@ const FeedDetails = ({ post }) => {
             to={`/post/:${post._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            {/* link to get individual post */}
             <div style={{ flex: 1 }}>
               <Text>
                 <h4 style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
@@ -90,16 +128,18 @@ const FeedDetails = ({ post }) => {
             </Text>
           </Link>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <ActionIcon
-            variant="outline"
-            className="material-symbols-outlined"
-            onClick={handleDeleteClick}
-            title="Delete"
-          >
-            <IconTrash size="1.1rem" />
-          </ActionIcon>
-        </div>
+        {isAuthorized && (
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <ActionIcon
+              variant="outline"
+              className="material-symbols-outlined"
+              onClick={handleDeleteClick}
+              title="Delete"
+            >
+              <IconTrash size="1.1rem" />
+            </ActionIcon>
+          </div>
+        )}
       </div>
     </Card>
   );

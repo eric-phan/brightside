@@ -101,7 +101,7 @@ nav button {
   /* this padding controls size of backgroundimage */
 }
 .aboutContent {
-  padding-top: 15rem;
+  padding: 15rem 10rem 10rem 10rem;
   max-width: 70rem; /* Adjust the maximum width as needed */
   margin: 0 auto; /* Center the content horizontally */
 
@@ -129,12 +129,6 @@ nav button {
   border-radius: 0;
   margin: 0 auto;
 }
-/* test */
-/* can override the titles on the post cards */
-/* .homePosts .post-details h4,
-.feedPosts .post-details h4 {
-  
-} */
 
 /* removes the underline from the post link */
 #root > div > div > div > div > div > a {

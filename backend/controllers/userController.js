@@ -16,13 +16,13 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.login(email, password);
     // pass in email and password from the request body
-    const userId = user._id.toString()
+    const userId = user._id.toString();
 
     // create a token
     const token = createToken(user._id);
 
     console.log("User ID:", userId);
-    console.log(user)
+    console.log(user);
     res.status(200).json({ email, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -30,16 +30,32 @@ const loginUser = async (req, res) => {
 };
 
 // verify a user
+// const verifyUser = async (req, res) => {
+//   const { email, password } = req.body;
+//   try {
+//     const user = await User.login(email, password);
+//     const userId = user.user_id
+//     console.log("User ID:", userId);
+//     res.status(200).json({ userId });
+//     console.log("success");
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 const verifyUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { token } = req.body;
+
   try {
-    const user = await User.login(email, password);
-    const userId = user.user_id
+    // Verify the JWT token
+    const decoded = jwt.verify(token, process.env.SECRET); // Replace 'your-secret-key' with your actual secret key
+
+    // Extract the user ID from the decoded token
+    const userId = decoded._id;
+
     console.log("User ID:", userId);
     res.status(200).json({ userId });
-    console.log("success");
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(401).json({ error: "Invalid token" });
   }
 };
 

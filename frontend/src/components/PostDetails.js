@@ -76,7 +76,7 @@ const PostDetails = ({ post }) => {
     }
   };
 
-  // const handleDeleteClick = async () => {
+  // const handleDeleteClickOG = async () => {
   //   if (!user) {
   //     return;
   //   }
@@ -111,14 +111,14 @@ const PostDetails = ({ post }) => {
     }
 
     try {
-      // Verify the user to get the userId
       const verifyResponse = await fetch("/api/user/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({ email: user.email, password: user.password }),
+        body: JSON.stringify({
+          token: user.token,
+        }),
       });
 
       if (verifyResponse.ok) {
@@ -134,23 +134,32 @@ const PostDetails = ({ post }) => {
         const deleteResponse = await fetch("/api/posts/" + post._id, {
           method: "DELETE",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         });
-
         const json = await deleteResponse.json();
-
         if (deleteResponse.ok) {
+          console.log("Post deleted successfully.");
+
+          // Remove the deleted post from the state
           dispatch({ type: "DELETE_POST", payload: json });
+        } else {
+          const errorResponse = await deleteResponse.json();
+          console.log("Failed to delete post.");
+          console.log("Error:", errorResponse.error);
+          // Handle the error case as needed
         }
       } else {
         const errorResponse = await verifyResponse.json();
         console.log("Failed to verify user");
         console.log("Post:", post.user_id);
         console.log("Error:", errorResponse.error);
+        // Handle the error case as needed
       }
     } catch (error) {
       console.error(error);
+      // Handle the error case as needed
     }
   };
 
@@ -198,63 +207,6 @@ const PostDetails = ({ post }) => {
           </div>
         </form>
       ) : (
-        // Display mode
-        // <div style={{ display: "flex" }}>
-        //   <div style={{ flex: "0 0 auto", marginRight: "1rem" }}>
-        //     <Link
-        //       to={`/post/:${post._id}`}
-        //       style={{ textDecoration: "none", color: "inherit" }}
-        //     >
-        //       {/* Display the image on the left */}
-        //       <div>
-        //         <img
-        //           src={post.image}
-        //           alt="Post Image"
-        //           style={{ width: "100%" }}
-        //         />
-        //       </div>
-        //     </Link>
-        //   </div>
-        //   <div style={{ flex: "1 1 auto" }}>
-        //     <Link
-        //       to={`/post/:${post._id}`}
-        //       style={{ textDecoration: "none", color: "inherit" }}
-        //     >
-        //       {/* Display the caption on the right */}
-        //       <div>
-        //         <Text>
-        //           <h4>{post.title}</h4>
-        //         </Text>
-        //         {/* <Text>
-        //               <strong>Reps: </strong>
-        //               {post.reps}
-        //             </Text> */}
-        //         <Text>
-        //           <strong>Caption: </strong>
-        //           {post.caption}
-        //         </Text>
-        //         <Text>
-        //           {formatDistanceToNow(new Date(post.createdAt), {
-        //             addSuffix: true,
-        //           })}
-        //         </Text>
-        //       </div>
-        //     </Link>
-        //     <span>
-        //       <ActionIcon
-        //         variant="outline"
-        //         className="material-symbols-outlined "
-        //         onClick={handleDeleteClick}
-        //         title="Delete"
-        //       >
-        //         <IconTrash size="1.1rem" />
-        //       </ActionIcon>
-        //     </span>
-        //     <Button style={{ marginTop: "23.4rem" }} onClick={handleEditClick}>
-        //       Edit
-        //     </Button>
-        //   </div>
-        // </div>
         <div
           style={{
             margin: "0 auto",
