@@ -6,7 +6,6 @@ import {
   Text,
   Card,
   Button,
-  FileButton,
   TextInput,
   useMantineTheme,
   FileInput,
@@ -86,7 +85,7 @@ const PostForm = () => {
         marginTop: "1rem",
       }}
     >
-      <form className="create" onSubmit={handleSubmit}>
+      <form className="postForm" onSubmit={handleSubmit}>
         <Text size="lg">Add a New Post</Text>
 
         <Text size="md">Title:</Text>

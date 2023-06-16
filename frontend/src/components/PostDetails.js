@@ -2,7 +2,14 @@ import { useState } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import { Text, Image, Input, Button, Card, useMantineTheme } from "@mantine/core";
+import {
+  Text,
+  Image,
+  Input,
+  Button,
+  Card,
+  useMantineTheme,
+} from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -69,32 +76,90 @@ const PostDetails = ({ post }) => {
     }
   };
 
+  // const handleDeleteClickOG = async () => {
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   // if (post.user_id !== user._id) {
+  //   //   console.log("You are not authorized to delete this post.");
+  //   //   return;
+  //   // }
+  //   console.log("post.user_id:", post);
+  //   console.log("user._id:", user);
+  //   try {
+  //     const response = await fetch("/api/posts/" + post._id, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     });
+
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       dispatch({ type: "DELETE_POST", payload: json });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const handleDeleteClick = async () => {
     if (!user) {
       return;
     }
 
-    // if (post.user_id !== user._id) {
-    //   console.log("You are not authorized to delete this post.");
-    //   return;
-    // }
-    console.log("post.user_id:", post);
-    console.log("user._id:", user);
     try {
-      const response = await fetch("/api/posts/" + post._id, {
-        method: "DELETE",
+      const verifyResponse = await fetch("/api/user/verify", {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          token: user.token,
+        }),
       });
 
-      const json = await response.json();
+      if (verifyResponse.ok) {
+        const { userId } = await verifyResponse.json();
+        console.log("Post:", post.user_id);
+        console.log("userId:", userId);
 
-      if (response.ok) {
-        dispatch({ type: "DELETE_POST", payload: json });
+        if (post.user_id !== userId) {
+          console.log("You are not authorized to delete this post.");
+          return;
+        }
+
+        const deleteResponse = await fetch("/api/posts/" + post._id, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const json = await deleteResponse.json();
+        if (deleteResponse.ok) {
+          console.log("Post deleted successfully.");
+
+          // Remove the deleted post from the state
+          dispatch({ type: "DELETE_POST", payload: json });
+        } else {
+          const errorResponse = await deleteResponse.json();
+          console.log("Failed to delete post.");
+          console.log("Error:", errorResponse.error);
+          // Handle the error case as needed
+        }
+      } else {
+        const errorResponse = await verifyResponse.json();
+        console.log("Failed to verify user");
+        console.log("Post:", post.user_id);
+        console.log("Error:", errorResponse.error);
+        // Handle the error case as needed
       }
     } catch (error) {
       console.error(error);
+      // Handle the error case as needed
     }
   };
 
@@ -142,40 +207,56 @@ const PostDetails = ({ post }) => {
           </div>
         </form>
       ) : (
-        // Display mode
-        <div style={{ display: "flex" }}>
-          <div style={{ flex: "0 0 auto", marginRight: "1rem" }}>
+        <div
+          style={{
+            margin: "0 auto",
+            maxWidth: "400px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginBottom: "1rem",
+            }}
+          >
             <Link
               to={`/post/:${post._id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              {/* Display the image on the left */}
-              <div>
-                <img
+              <div style={{ flex: 1 }}>
+                <Text>
+                  <h4 style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
+                    {post.title}
+                  </h4>
+                </Text>
+                <Image
                   src={post.image}
-                  alt="Post Image"
-                  style={{ width: "100%" }}
+                  alt="PostImage"
+                  style={{ width: "100%", height: "auto" }}
                 />
               </div>
             </Link>
           </div>
-          <div style={{ flex: "1 1 auto" }}>
+          <div>
             <Link
               to={`/post/:${post._id}`}
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              {/* Display the caption on the right */}
               <div>
                 <Text>
-                  <h4>{post.title}</h4>
-                </Text>
-                {/* <Text>
-                      <strong>Reps: </strong>
-                      {post.reps}
-                    </Text> */}
-                <Text>
                   <strong>Caption: </strong>
-                  {post.caption}
+                  <span
+                    style={{
+                      display: "inline-block",
+                      maxWidth: "100%",
+                      overflowWrap: "break-word",
+                    }}
+                  >
+                    {post.caption}
+                  </span>
                 </Text>
                 <Text>
                   {formatDistanceToNow(new Date(post.createdAt), {
@@ -184,19 +265,17 @@ const PostDetails = ({ post }) => {
                 </Text>
               </div>
             </Link>
-            <span>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Button onClick={handleEditClick}>Edit</Button>
               <ActionIcon
                 variant="outline"
-                className="material-symbols-outlined "
+                className="material-symbols-outlined"
                 onClick={handleDeleteClick}
                 title="Delete"
               >
                 <IconTrash size="1.1rem" />
               </ActionIcon>
-            </span>
-            <Button style={{ marginTop: "23.4rem" }} onClick={handleEditClick}>
-              Edit
-            </Button>
+            </div>
           </div>
         </div>
       )}

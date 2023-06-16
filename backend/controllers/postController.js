@@ -46,7 +46,7 @@ const getPost = async (req, res) => {
 const createPost = async (req, res) => {
   const { title, reps, caption } = req.body;
   const image = req.file; // Use req.file instead of req.body.image
- 
+
   // ...
 
   try {
@@ -55,7 +55,8 @@ const createPost = async (req, res) => {
     const uploadResponse = await cloudinary.uploader.upload(image.path, {
       upload_preset: "postsMERN",
       transformation: [
-        { width: 500, height: 500, crop: "fill" },
+        { width: 500, height: 500, crop: "fill", responsive: true },
+        // { width: "auto", height: "auto", crop: "fill", responsive: true },
         // Adjust the width and height as needed
       ],
     });
@@ -103,7 +104,6 @@ const deletePost = async (req, res) => {
 };
 
 // update a post
-
 
 const updatePost = async (req, res) => {
   const { id } = req.params;
