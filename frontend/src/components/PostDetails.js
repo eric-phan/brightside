@@ -76,29 +76,78 @@ const PostDetails = ({ post }) => {
     }
   };
 
+  // const handleDeleteClick = async () => {
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   // if (post.user_id !== user._id) {
+  //   //   console.log("You are not authorized to delete this post.");
+  //   //   return;
+  //   // }
+  //   console.log("post.user_id:", post);
+  //   console.log("user._id:", user);
+  //   try {
+  //     const response = await fetch("/api/posts/" + post._id, {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //     });
+
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       dispatch({ type: "DELETE_POST", payload: json });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   const handleDeleteClick = async () => {
     if (!user) {
       return;
     }
 
-    // if (post.user_id !== user._id) {
-    //   console.log("You are not authorized to delete this post.");
-    //   return;
-    // }
-    console.log("post.user_id:", post);
-    console.log("user._id:", user);
     try {
-      const response = await fetch("/api/posts/" + post._id, {
-        method: "DELETE",
+      // Verify the user to get the userId
+      const verifyResponse = await fetch("/api/user/verify", {
+        method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
+        body: JSON.stringify({ email: user.email, password: user.password }),
       });
 
-      const json = await response.json();
+      if (verifyResponse.ok) {
+        const { userId } = await verifyResponse.json();
+        console.log("Post:", post.user_id);
+        console.log("userId:", userId);
 
-      if (response.ok) {
-        dispatch({ type: "DELETE_POST", payload: json });
+        if (post.user_id !== userId) {
+          console.log("You are not authorized to delete this post.");
+          return;
+        }
+
+        const deleteResponse = await fetch("/api/posts/" + post._id, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+
+        const json = await deleteResponse.json();
+
+        if (deleteResponse.ok) {
+          dispatch({ type: "DELETE_POST", payload: json });
+        }
+      } else {
+        const errorResponse = await verifyResponse.json();
+        console.log("Failed to verify user");
+        console.log("Post:", post.user_id);
+        console.log("Error:", errorResponse.error);
       }
     } catch (error) {
       console.error(error);
@@ -226,7 +275,7 @@ const PostDetails = ({ post }) => {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div style={{ flex: 1 }}>
-              <Text>
+                <Text>
                   <h4 style={{ maxWidth: "100%", overflowWrap: "break-word" }}>
                     {post.title}
                   </h4>
@@ -245,7 +294,6 @@ const PostDetails = ({ post }) => {
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div>
-              
                 <Text>
                   <strong>Caption: </strong>
                   <span
