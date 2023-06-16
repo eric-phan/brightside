@@ -24,7 +24,7 @@ The application hast the following pages:
 
 
 ## Technologies Used
-Made with **Node.js**, **Express**, **MongoDB**, **React**, **MantineUI**, **Cloudinary**, and **CSS3**.
+Made with **Node.js**, **Express**, **MongoDB**, **React**, **MantineUI**, **Cloudinary**, **JWT**, and **CSS3**.
 
 ## Use and Installation
 
