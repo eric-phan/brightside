@@ -111,6 +111,25 @@ nav button {
   font-size: 30px;
 }
 
+/* viewtool */
+.viewContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-radius: 0;
+  padding: 0rem;
+  /* this padding controls size of backgroundimage */
+}
+.viewInput {
+  width: 18rem;
+  margin: 0 auto;
+  padding-top: 0.5rem;
+
+}
+.viewHeading {
+  font-size: 30px;
+}
+
 /* homepage + feed*/
 .home,
 .feed {
