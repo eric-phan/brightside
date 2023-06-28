@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useState } from "react";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
-import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { useHotkeys } from "@mantine/hooks";
 
 // pages & components
 import Home from "./pages/Home";

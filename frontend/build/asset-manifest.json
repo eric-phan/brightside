@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.45b7182b.css",
-    "main.js": "/static/js/main.5577c2fb.js",
+    "main.css": "/static/css/main.6c6e2690.css",
+    "main.js": "/static/js/main.3785b280.js",
+    "static/media/aboutBrightside.jpg": "/static/media/aboutBrightside.8781ac67e0ea8e5da96a.jpg",
     "index.html": "/index.html",
-    "main.45b7182b.css.map": "/static/css/main.45b7182b.css.map",
-    "main.5577c2fb.js.map": "/static/js/main.5577c2fb.js.map"
+    "main.6c6e2690.css.map": "/static/css/main.6c6e2690.css.map",
+    "main.3785b280.js.map": "/static/js/main.3785b280.js.map"
   },
   "entrypoints": [
-    "static/css/main.45b7182b.css",
-    "static/js/main.5577c2fb.js"
+    "static/css/main.6c6e2690.css",
+    "static/js/main.3785b280.js"
   ]
 }
