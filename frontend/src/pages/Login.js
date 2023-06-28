@@ -55,7 +55,6 @@ import {
   Text,
   Button,
   Card,
-  Paper,
   BackgroundImage,
   Overlay,
   ColorSchemeProvider,
@@ -87,7 +86,7 @@ const Login = () => {
         <ColorSchemeProvider colorScheme="light">
           <Card shadow="xl" className="loginContainer">
             <form className="login" onSubmit={handleSubmit}>
-              <Text style={{ color: textColor  }}>
+              <Text style={{ color: textColor }}>
                 <h3>Login</h3>
               </Text>
 

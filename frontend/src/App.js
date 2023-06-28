@@ -1,12 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useState } from "react";
-import {
-  MantineProvider,
-  ColorSchemeProvider,
-  ColorScheme,
-} from "@mantine/core";
-import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
+import { useHotkeys } from "@mantine/hooks";
 
 // pages & components
 import Home from "./pages/Home";
@@ -15,6 +11,7 @@ import Signup from "./pages/Signup";
 import About from "./pages/About";
 import Feed from "./pages/Feed";
 import Post from "./pages/Post";
+import ViewTool from "./pages/Viewtool";
 // import the login and sign up forms
 import Navbar from "./components/Navbar";
 
@@ -79,6 +76,11 @@ function App() {
               <Route
                 path="/post/:id"
                 element={user ? <Post /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/viewtool"
+                element={user ? <ViewTool /> : <Navigate to="/" />}
+                // ibid
               />
               <Route
                 path="/login"
