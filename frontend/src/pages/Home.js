@@ -10,10 +10,10 @@ import { Card } from "@mantine/core";
 const Home = () => {
   const { posts, dispatch } = usePostsContext();
   const { user } = useAuthContext();
-
+  const backendUrl = "https://brightside-production.up.railway.app"
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/posts", {
+      const response = await fetch(`${backendUrl}/api/posts`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();

@@ -8,12 +8,13 @@ export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(null)
   // will be true when start the request
   const { dispatch } = useAuthContext()
+  const backendUrl = "https://brightside-production.up.railway.app"
 
   const signup = async (email, password) => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/signup', {
+    const response = await fetch(`${backendUrl}/api/user/signup`, {
       // proxy to localhost4000
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

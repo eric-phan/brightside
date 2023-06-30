@@ -14,9 +14,14 @@ const Post = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const response = await fetch(`/api/posts/${id.substring(1)}`, {
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
+      const response = await fetch(
+        `https://brightside-production.up.railway.app/api/posts/${id.substring(
+          1
+        )}`,
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
       const json = await response.json();
 
       if (response.ok) {
@@ -35,9 +40,9 @@ const Post = () => {
   return (
     <Card>
       <Container>
-      {/* <div className="Post"> */}
-      {post && <PostDetails post={post} />}
-      {/* </div> */}
+        {/* <div className="Post"> */}
+        {post && <PostDetails post={post} />}
+        {/* </div> */}
       </Container>
     </Card>
   );

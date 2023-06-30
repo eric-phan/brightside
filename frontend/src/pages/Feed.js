@@ -9,10 +9,11 @@ const Feed = () => {
   const { posts, dispatch } = usePostsContext();
   const { user } = useAuthContext();
   const [editPostId, setEditPostId] = useState(null);
+  const backendUrl = "https://brightside-production.up.railway.app";
 
   useEffect(() => {
     const fetchPostsFeed = async () => {
-      const response = await fetch("/api/posts/feed", {
+      const response = await fetch(`${backendUrl}/api/posts/feed`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 
