@@ -29,7 +29,7 @@ The application hast the following pages:
 Made with **Node.js**, **Express**, **MongoDB**, **React**, **MantineUI**, **Cloudinary**, **JWT**, and **CSS3**.
 
 ## Use and Installation
-This app is hosted at [here] (https://brightside-frontend.vercel.app/) but you may test it locally with the instructions below.
+This app is hosted at [here](https://brightside-frontend.vercel.app/) but you may test it locally with the instructions below.
 
 ### Install
  `npm install`
