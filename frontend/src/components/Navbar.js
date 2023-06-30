@@ -51,6 +51,7 @@ const Navbar = () => {
               </Link>
               <Link to="/about">About</Link>
               <Link to="/feed">Feed</Link>
+              <Link to="/viewtool">Plant Search</Link>
               <Button onClick={handleClick}>Log out</Button>
             </div>
           )}

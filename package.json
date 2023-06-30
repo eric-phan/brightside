@@ -1,0 +1,19 @@
+{
+  "name": "@ultracire/brightside",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/eric-phan/brightside.git",
+  "author": "ultracire <ericphan43@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start": "concurrently \"yarn workspace backend start\" \"yarn workspace frontend start\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

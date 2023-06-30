@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Link } from "react-router-dom";
-import { Text, useMantineTheme, Card, Image, Button } from "@mantine/core";
+import { Text, useMantineTheme, Card, Image } from "@mantine/core";
 import { ActionIcon } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
