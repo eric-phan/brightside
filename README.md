@@ -68,7 +68,7 @@ To get the values for these environment variables, you will need to
 ## Things to add
 
 - ~~Migrating to React Views from EJS template engine.~~
-- Host the client site.
-- Integrate a Plant Data API for clientside use.
+- ~~Host the client site.~~
+- ~~Integrate a Plant Data API for clientside use.~~
 
 ---
