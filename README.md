@@ -29,6 +29,7 @@ The application hast the following pages:
 Made with **Node.js**, **Express**, **MongoDB**, **React**, **MantineUI**, **Cloudinary**, **JWT**, and **CSS3**.
 
 ## Use and Installation
+This app is hosted at [here] (https://brightside-frontend.vercel.app/) but you may test it locally with the instructions below.
 
 ### Install
  `npm install`
@@ -39,7 +40,9 @@ To get the values for these environment variables, you will need to
   2) Create an account on Cloudinary
    
 - Create a `.env` file, put it in your config folder, and add the following as `key = value`
-  - DB_STRING = `your database URI`
+  - PORT = `your preferred port for local host`
+  - SECRET = `your JWT secret key`
+  - MONGO_URI = `your database URI`
   - CLOUDINARY_CLOUD_NAME = `your cloudinary cloud name`
   - CLOUDINARY_API_KEY = `your cloudinary api key`
   - CLOUDINARY_API_SECRET = `your cloudinary api secret`
