@@ -124,7 +124,6 @@ nav button {
   width: 18rem;
   margin: 0 auto;
   padding-top: 0.5rem;
-
 }
 .viewHeading {
   font-size: 30px;
@@ -175,26 +174,20 @@ nav button {
   /* color: #555; */
 }
 
-@media (max-width: 400px) {
-  .postDetails {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
 .material-symbols-outlined {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  /* position: absolute; */
+  /* top: 20px; */
+  /* right: 20px; */
   cursor: pointer;
   /* background: lightgrey; */
   /* padding: 6px; */
   /* border-radius: 50%; */
   /* color: #333; */
 }
+
 
 /* new post form */
 label,
@@ -274,8 +267,16 @@ nav button {
   margin: 0 auto;
   margin-top: 15rem;
   justify-content: center;
-  height: 44vh;
+  /* height: 44vh; */
   width: 30vw;
+}
+
+/* To make the login/signup mobile responsive */
+.loginContainer,
+.signupContainer {
+  @media (max-width: 414px) {
+    width: 80vw;
+  }
 }
 
 .signup {
