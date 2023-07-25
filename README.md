@@ -67,7 +67,6 @@ To get the values for these environment variables, you will need to
     "nodemon": "^2.0.7",
     "jsonwebtoken": "^8.5.1",
     "validator": "^13.7.0"
-  }
 
 ## Things to add
 
