@@ -188,7 +188,6 @@ nav button {
   /* color: #333; */
 }
 
-
 /* new post form */
 label,
 input {
@@ -272,10 +271,11 @@ nav button {
 }
 
 /* To make the login/signup mobile responsive */
-.loginContainer,
-.signupContainer {
-  @media (max-width: 414px) {
-    width: 80vw;
+/* To make the login/signup mobile responsive */
+@media (max-width: 414px) {
+  .loginContainer,
+  .signupContainer {
+    width: 80vw; /* Width is set to 80% of the viewport width for screens up to 414px */
   }
 }
 
