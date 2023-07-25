@@ -16,7 +16,7 @@ I never thought I would garden as a hobby, and picked it up on a whim, and I fel
 
 
 ## Details
-The application hast the following pages:
+The application has the following pages:
 -**Signup page**: The user will provide email and password to create an account.
 -**Login page**: Email and password credentials will be provided here to authenticate the user.
 -**Profile page**: The user can view their own posts and login email here.
