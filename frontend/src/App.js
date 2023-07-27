@@ -65,10 +65,7 @@ function App() {
               {/* route protecting: */}
               {/* if there is a user, go to the homepage, if not go to login */}
 
-              <Route
-                path="/about"
-                element={user ? <About /> : <Navigate to="/" />}
-              />
+              <Route path="/about" element={<About />} />
               <Route
                 path="/feed"
                 element={user ? <Feed /> : <Navigate to="/" />}
