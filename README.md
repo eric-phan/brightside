@@ -1,4 +1,5 @@
 # Brightside
+
 ### Talk, trade and grow your passion.
 <!-- <div align="center"><img src="https://images.unsplash.com/photo-1436891436013-5965265af5fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="plants" align="center"></div> -->
 
@@ -16,7 +17,7 @@ I never thought I would garden as a hobby, and picked it up on a whim, and I fel
 
 
 ## Details
-The application hast the following pages:
+The application has the following pages:
 -**Signup page**: The user will provide email and password to create an account.
 -**Login page**: Email and password credentials will be provided here to authenticate the user.
 -**Profile page**: The user can view their own posts and login email here.
@@ -66,7 +67,6 @@ To get the values for these environment variables, you will need to
     "nodemon": "^2.0.7",
     "jsonwebtoken": "^8.5.1",
     "validator": "^13.7.0"
-  }
 
 ## Things to add
 
