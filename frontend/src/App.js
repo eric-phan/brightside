@@ -79,7 +79,7 @@ function App() {
               />
               <Route
                 path="/viewtool"
-                element={user ? <ViewTool /> : <Navigate to="/" />}
+                element={<ViewTool />}
                 // ibid
               />
               <Route

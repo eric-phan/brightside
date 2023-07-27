@@ -69,6 +69,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link to="/signup">Signup</Link>
+              <Link to="/viewtool">Plant Search</Link>
             </div>
           )}
         </nav>
