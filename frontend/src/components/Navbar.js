@@ -11,7 +11,7 @@ import { IconSun, IconMoonStars } from "@tabler/icons-react";
 
 const Navbar = () => {
   const { logout } = useLogout();
-  // imported logout function
+  // imported Logout function
   const { user } = useAuthContext();
 
   const handleClick = () => {
