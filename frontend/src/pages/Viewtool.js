@@ -100,7 +100,7 @@ const ViewTool = () => {
         <img
           src={defaultImageUrl}
           alt="Default"
-          style={{ borderRadius: "50%", maxWidth: "65vh", margin: "0 auto" }}
+          style={{ borderRadius: "50%", maxWidth: "65vw", margin: "0 auto" }}
         />
       )}
     </Card>
