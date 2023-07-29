@@ -18,11 +18,12 @@ I never thought I would garden as a hobby, and picked it up on a whim, and I fel
 
 ## Details
 The application has the following pages:
--**Signup page**: The user will provide email and password to create an account.
--**Login page**: Email and password credentials will be provided here to authenticate the user.
--**Profile page**: The user can view their own posts and login email here.
--**Feed page**: The user can search the database from here.
--**About page**: This application includes an about page in which users can understand the purpose of the webapp.
+- **Signup page**: The user will provide email and password to create an account.
+- **Login page**: Email and password credentials will be provided here to authenticate the user.
+- **Viewtool page**: Access an internal webapp to view an exhaustive list of different speices of plants.
+- **Profile page**: The user can view their own posts and login email here.
+- **Feed page**: The user can search the database from here.
+- **About page**: This application includes an about page in which users can understand the purpose of the webapp.
 
 
 
